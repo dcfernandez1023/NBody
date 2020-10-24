@@ -1,4 +1,4 @@
-package NBody.controller;
+package NBody.CelestialController;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package NBody.model;
+package NBody.CelestialModel;
 
 public class ModelDriver {
     public static void main (String[] args) throws Exception {

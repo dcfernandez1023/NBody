@@ -1,8 +1,8 @@
-package NBody.controller;
+package NBody.CelestialController;
 
-import NBody.model.Celestial;
-import NBody.model.Container;
-import NBody.model.ContainerFactory;
+import NBody.CelestialModel.Celestial;
+import NBody.CelestialModel.Container;
+import NBody.CelestialModel.ContainerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;

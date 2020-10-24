@@ -1,8 +1,6 @@
-package NBody.model;
+package NBody.CelestialModel;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class Celestial {
     private HashMap<String, Object> data;

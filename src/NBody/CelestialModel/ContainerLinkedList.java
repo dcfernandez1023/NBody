@@ -1,4 +1,4 @@
-package NBody.model;
+package NBody.CelestialModel;
 
 public class ContainerLinkedList<E> implements Container<E> {
     private int size;

@@ -1,4 +1,4 @@
-package NBody.model;
+package NBody.CelestialModel;
 
 public class ContainerFactory<E> {
     public Container<E> getContainer(String structureType) throws Exception {

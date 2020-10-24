@@ -1,4 +1,4 @@
-package NBody.model;
+package NBody.CelestialModel;
 
 public interface Container<E> {
     public void add(E obj);
