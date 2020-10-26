@@ -93,12 +93,7 @@ public class ContainerLinkedList<E> implements Container<E> {
         RETURN: returns the value of the node at the specified position
     */
     @Override
-    public E get(int position) throws Exception {
-        //throw exception if LL is empty
-        if(this.head == null) {
-            throw new Exception("Cannot get nodes from an empty list");
-        }
-        //throw exception if position is invalid
+    public E get(int position) {
         if(position < 0 || position >= this.size) {
             return null;
         }

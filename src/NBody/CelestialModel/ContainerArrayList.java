@@ -37,11 +37,8 @@ public class ContainerArrayList<E> implements Container<E> {
         size++;
     }
     @Override
-    public E get(int position) throws Exception {
-        if(this.arr.length == 0) {
-            throw new Exception("Cannot get elements from empty list");
-        }
-        if(position >= arr.length) {
+    public E get(int position) {
+        if(position >= arr.length || position < 0) {
             return null;
         }
         return this.arr[position];

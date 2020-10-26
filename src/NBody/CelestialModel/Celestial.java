@@ -72,9 +72,9 @@ public class Celestial {
         * DESCRIPTION - returns the value of the given key
         * RETURN: Object
     */
-    public Object getValue(String key) throws Exception {
+    public Object getValue(String key) {
         if(!this.isValidKey(key)) {
-            throw new Exception("Invalid Celestial key");
+            return null;
         }
         return this.data.get(key);
     }
