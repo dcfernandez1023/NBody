@@ -6,6 +6,9 @@ import NBody.CelestialModel.ContainerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CelestialDataParser {
@@ -29,6 +32,7 @@ public class CelestialDataParser {
         int counter = 0;
         ContainerFactory<Object> containerFactory = new ContainerFactory<>();
         this.celestialMetaData = containerFactory.getContainer("arraylist", 2);
+        HashMap<String, String> data = new HashMap<>();
         while(s.hasNextLine()) {
             String line = s.nextLine();
             if(line.trim().length() == 0) {
@@ -42,22 +46,33 @@ public class CelestialDataParser {
                 counter++;
             }
             else {
-                Container<Object> data = containerFactory.getContainer("arraylist", 7);
                 String temp = "";
+                int n = 0;
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) != ',') {
                         temp = temp + line.charAt(i);
                     }
                     else {
-                        data.add(temp);
+                        data.put(Celestial.FIELDS[n], temp);
                         temp = "";
+                        n++;
                     }
                 }
-                data.add(temp);
-                Celestial celestial = new Celestial(data);
-                this.celestialRecords.add(celestial);
+                data.put(Celestial.FIELDS[Celestial.FIELDS.length-1], temp);
+                Celestial c = this.constructCelestial(data);
+                this.celestialRecords.add(c);
             }
         }
         s.close();
+    }
+    private Celestial constructCelestial(HashMap<String, String> data) throws NumberFormatException {
+        String name = data.get("name");
+        double mass = Double.parseDouble(data.get("mass"));
+        double x = Double.parseDouble(data.get("x"));
+        double y = Double.parseDouble(data.get("y"));
+        double xVel = Double.parseDouble(data.get("xVel"));
+        double yVel = Double.parseDouble(data.get("yVel"));
+        double size = Double.parseDouble(data.get("size"));
+        return new Celestial(name, mass, x, y, xVel, yVel, size);
     }
 }

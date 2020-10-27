@@ -89,6 +89,8 @@ public class CelestialRenderer {
     private void renderCelestials() throws Exception {
         this.frame.getContentPane().add(new CelestialDrawer(this.windowXPixels, this.windowYPixels, this.fileName));
         this.frame.setTitle("Celestial Renderer " + this.windowXPixels + " x " + this.windowYPixels);
+        this.frame.setSize(this.windowXPixels, this.windowYPixels);
+        this.panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         this.frame.revalidate();
     }
     private void clearMainPanel() {
@@ -103,7 +105,6 @@ public class CelestialRenderer {
         int y = Integer.parseInt(inputFieldY.getText());
         this.windowXPixels = x;
         this.windowYPixels = y;
-        this.frame.setSize(x,y);
     }
 }
 
