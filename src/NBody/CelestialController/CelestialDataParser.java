@@ -7,8 +7,6 @@ import NBody.CelestialModel.ContainerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
 
 public class CelestialDataParser {
@@ -73,6 +71,6 @@ public class CelestialDataParser {
         double xVel = Double.parseDouble(data.get("xVel"));
         double yVel = Double.parseDouble(data.get("yVel"));
         double size = Double.parseDouble(data.get("size"));
-        return new Celestial(name, mass, x, y, xVel, yVel, size);
+        return new Celestial(name, mass, x, y, xVel, yVel, size, Double.parseDouble((String) this.celestialMetaData.get(1)));
     }
 }

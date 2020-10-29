@@ -17,7 +17,7 @@ public class CelestialDrawer extends JPanel implements ActionListener {
     private int yPixels;
     private Container<Object> celestials;
     private Container<Object> metaData;
-    private Timer timer = new Timer(5, this);
+    private Timer timer = new Timer(75, this);
 
     public CelestialDrawer(int xPixels, int yPixels, String fileName) throws Exception {
         CelestialDataParser cdp = new CelestialDataParser(fileName);
@@ -45,14 +45,29 @@ public class CelestialDrawer extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.updateCelestials();
+        try
+        {
+            this.updateCelestials();
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
-    private void updateCelestials() {
+    private void updateCelestials() throws Exception
+    {
         for(int i = 0; i < this.celestials.size(); i++) {
             Celestial c = (Celestial) this.celestials.get(i);
             for(int j = 0; j < this.celestials.size(); j++) {
                 c.calculateNetForces(this.celestials);
                 c.updateCelestial();
+                if(c.getX() < 0 || c.getX() > this.xPixels) {
+                    this.celestials.remove(i);
+                    break;
+                }
+                if(c.getY() < 0 || c.getX() > this.yPixels) {
+                    this.celestials.remove(i);
+                    break;
+                }
             }
         }
         repaint();

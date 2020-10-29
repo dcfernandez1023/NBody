@@ -1,5 +1,9 @@
 package NBody.CelestialModel;
 
+/*
+    This Class implements the Container interface defined in Nbody.CelestialModel. This class maintains a LinkedList
+    data structure and has methods to manipulate its data.
+*/
 public class ContainerLinkedList<E> implements Container<E> {
     private int size;
     private Node<E> head;

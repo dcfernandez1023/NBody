@@ -6,7 +6,7 @@ public class ModelDriver {
         Container<Celestial> arr = celestialFactory.getContainer("arraylist");
         Container<Celestial> ll = celestialFactory.getContainer("linkedlist");
         for(int i = 0; i < 6; i++) {
-            Celestial c = new Celestial("test",10,10,10,10,10,10);
+            Celestial c = new Celestial("test",10,10,10,10,10,10, 10);
             arr.add(c);
             ll.add(c);
         }
