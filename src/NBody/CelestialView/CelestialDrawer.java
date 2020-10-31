@@ -17,7 +17,7 @@ public class CelestialDrawer extends JPanel implements ActionListener {
     private int yPixels;
     private Container<Object> celestials;
     private Container<Object> metaData;
-    private Timer timer = new Timer(75, this);
+    private Timer timer = new Timer(5, this);
 
     public CelestialDrawer(int xPixels, int yPixels, String fileName) throws Exception {
         CelestialDataParser cdp = new CelestialDataParser(fileName);

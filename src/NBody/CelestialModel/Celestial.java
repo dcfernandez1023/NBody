@@ -80,8 +80,8 @@ public class Celestial {
     public void updateCelestial() {
         this.accelX = this.netForceX/this.mass;
         this.accelY = this.netForceY/this.mass;
-        this.xVel = this.xVel + this.accelX;
-        this.yVel = this.yVel + this.accelY;
+        this.xVel = (this.xVel + this.accelX);
+        this.yVel = (this.yVel + this.accelY);
         this.x = this.x + this.xVel;
         this.y = this.y + this.yVel;
     }
@@ -126,7 +126,7 @@ public class Celestial {
     /*
         * PARAMS: Celestial c - another celestial that this object is being compared to
         * DESCRIPTION: calculates the distance between this object in relation to the celestial it is being compared to
-                       by using the pythagorean theorem
+                       by using the pythagorean theorem: d^2 = x^2 + y^2
         * RETURN: double - the distance between this object and another celestial
     */
     private double calculateDistance(Celestial c) {
