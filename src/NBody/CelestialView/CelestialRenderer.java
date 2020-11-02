@@ -15,15 +15,21 @@ public class CelestialRenderer {
     private JFrame frame;
     private JPanel panel;
 
-    public CelestialRenderer(Container<Object> celestials, Container<Object> metaData, String fileName) {
+    public CelestialRenderer(String fileName) {
         this.windowXPixels = 768;
         this.windowYPixels = 768;
         this.fileName = fileName;
     }
     public void render() {
-        this.renderWelcomeScreen();
+        try {
+            this.renderWelcomeScreen();
+        }
+        catch(Exception e) {
+            this.clearMainPanel();
+            this.renderErrorPanel(e);
+        }
     }
-    private void renderWelcomeScreen() {
+    private void renderWelcomeScreen() throws Exception {
         this.frame = new JFrame("CS 245 NBody - Welcome Screen");
         this.panel = new JPanel();
         this.frame.setContentPane(this.panel);
@@ -74,7 +80,8 @@ public class CelestialRenderer {
                     renderCelestials();
                 }
                 catch (Exception ex) {
-                    ex.printStackTrace();
+                    clearMainPanel();
+                    renderErrorPanel(ex);
                 }
             }
         });
@@ -105,6 +112,17 @@ public class CelestialRenderer {
         int y = Integer.parseInt(inputFieldY.getText());
         this.windowXPixels = x;
         this.windowYPixels = y;
+    }
+    private void renderErrorPanel(Exception e) {
+        this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
+        this.panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
+        JPanel panel = new JPanel();
+        JLabel errorPrompt = new JLabel("Oops! An error occurred: ");
+        JLabel errorMessage = new JLabel(e.getMessage());
+        panel.add(errorPrompt);
+        panel.add(errorMessage);
+        this.panel.add(panel);
+        this.frame.revalidate();
     }
 }
 

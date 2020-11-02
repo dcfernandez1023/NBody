@@ -63,7 +63,7 @@ public class CelestialDataParser {
         }
         s.close();
     }
-    private Celestial constructCelestial(HashMap<String, String> data) throws NumberFormatException {
+    private Celestial constructCelestial(HashMap<String, String> data) throws NumberFormatException, Exception {
         String name = data.get("name");
         double mass = Double.parseDouble(data.get("mass"));
         double x = Double.parseDouble(data.get("x"));

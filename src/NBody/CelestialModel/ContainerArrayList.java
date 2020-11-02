@@ -4,9 +4,9 @@ package NBody.CelestialModel;
     This Class implements the Container interface defined in Nbody.CelestialModel. This class maintains an ArrayList
     data structure and has methods to manipulate its data.
 */
-public class ContainerArrayList<E> implements Container<E> {
+public class ContainerArrayList<T> implements Container<T> {
     private int size;
-    private E[] arr;
+    private T[] arr;
 
     /*
         * PARAMS: int capacity - the initial length of the array
@@ -15,15 +15,15 @@ public class ContainerArrayList<E> implements Container<E> {
     */
     public ContainerArrayList(int capacity) {
         this.size = 0;
-        this.arr = (E[]) new Object[capacity];
+        this.arr = (T[]) new Object[capacity];
     }
     /*
-        * PARAMS: E obj - the item to add to the array
+        * PARAMS: T obj - the item to add to the array
         * DESCRIPTION: adds an item at the end of the array; grows the length of the array if necessary
         * RETURN: none
     */
     @Override
-    public void add(E obj) {
+    public void add(T obj) {
         //if number of items in the array exceeds the length, grow the array
         if(this.size >= this.arr.length) {
             this.growArray();
@@ -37,14 +37,14 @@ public class ContainerArrayList<E> implements Container<E> {
     }
     /*
         * PARAMS:
-            * E obj - the item to add to the array
+            * T obj - the item to add to the array
             * int position - the index at which the item should be added
         * DESCRIPTION: adds an item at the specified position; grows the length of the array if necessary;
                        throws exception if position is invalid
         * RETURN: none
     */
     @Override
-    public void add(E obj, int position) throws Exception {
+    public void add(T obj, int position) throws Exception {
         //throw exception if position is invalid
         if(position >= this.arr.length || position < 0) {
             throw new Exception("Position: " + position + " out of bounds for length " + this.arr.length);
@@ -54,8 +54,8 @@ public class ContainerArrayList<E> implements Container<E> {
             this.growArray();
         }
         //initialize temp variables to perform swaps as the algorithm loops and shifts positions of the array
-        E temp1 = obj;
-        E temp2;
+        T temp1 = obj;
+        T temp2;
         //loop through the array and shift positions over to insert the item at the specified position
         for(int i = position-1; i < this.size; i++) {
             temp2 = this.arr[i+1]; //store position at current position+1
@@ -67,10 +67,10 @@ public class ContainerArrayList<E> implements Container<E> {
     /*
         * PARAMS: int position - the position of the item to be returned
         * DESCRIPTION: returns the item at the specified position; returns null if position is invalid
-        * RETURN: E - the item at the specified position
+        * RETURN: T - the item at the specified position
     */
     @Override
-    public E get(int position) {
+    public T get(int position) {
         //if position is invalid throw exception
         if(position >= arr.length || position < 0) {
             return null;
@@ -80,16 +80,16 @@ public class ContainerArrayList<E> implements Container<E> {
     /*
         * PARAMS: int position - the position of the item to be removed
         * DESCRIPTION: removes the item at the specified position and returns it; throws exception if invalid position
-        * RETURN: E - the item that was just removed
+        * RETURN: T - the item that was just removed
     */
     @Override
-    public E remove(int position) throws Exception {
+    public T remove(int position) throws Exception {
         //if position is invalid, throw exception
         if(position >= this.arr.length || position < 0) {
             throw new Exception("Position: " + position + " out of bounds for length " + this.arr.length);
         }
         //store the value at the specified position
-        E val = this.arr[position];
+        T val = this.arr[position];
         //loop through the array starting at the specified position
         //replace the item at the current position with 1 position ahead of it
         for(int i = position; i < this.arr.length-1; i++) {
@@ -130,7 +130,7 @@ public class ContainerArrayList<E> implements Container<E> {
         * RETURN: none
     */
     private void growArray() {
-        E[] newArr = (E[]) new Object[this.arr.length+1];
+        T[] newArr = (T[]) new Object[this.arr.length+1];
         for(int i = 0; i < this.arr.length; i++) {
             newArr[i] = this.arr[i];
         }
