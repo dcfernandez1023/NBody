@@ -3,7 +3,7 @@ CS 245 (Data Struct. &amp; Algo) - NBody
 
 DESCRIPTION:
 This program simulates the effect that gravitational force, mass, acceleration, and velocity have on moving objects.  The end result of the calculations and animations from this
-project is something comparable toa virtual solar system.
+project is something comparable to a virtual solar system.
 
 STRUCTURE OF THE APPLICATION:
 This project follows a model, view, controller (MVC) architecture.  The way that the model, view, and controller interact is described below:
