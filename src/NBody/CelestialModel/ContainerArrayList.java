@@ -94,9 +94,8 @@ public class ContainerArrayList<T> implements Container<T> {
         //replace the item at the current position with 1 position ahead of it
         for(int i = position; i < this.arr.length-1; i++) {
             this.arr[i] = this.arr[i+1];
+            this.arr[i+1] = null;
         }
-        //set last index in the array to null to account for an item being removed
-        this.arr[this.arr.length-1] = null;
         this.size--;
         return val;
     }

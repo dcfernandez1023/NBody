@@ -5,7 +5,6 @@ package NBody.CelestialModel;
 */
 public class Celestial {
     public static final double GC = 6.67E-11; //gravitational constant
-    public static final double time = 25000.0;
     //array of fields that is used to ensure the correct data is obtained when instantiating this class
     public static final String[] FIELDS = {
             "name",
@@ -24,12 +23,10 @@ public class Celestial {
     private double xVel, yVel;
     private double size;
     private double netForceX, netForceY;
-    private double accelX, accelY;
     private double scaleFactor;
 
     //constructor; takes in params that correspond to the data from the CSV file and sets the data members
     public Celestial(String name, double mass, double x, double y, double xVel, double yVel, double size, double scaleFactor) {
-        System.out.println(scaleFactor);
         this.name = name;
         this.mass = mass;
         this.x = x;
@@ -71,11 +68,10 @@ public class Celestial {
         * DESCRIPTION: takes in an iterable data structure and calculates the net x and y forces acting on this object
         * RETURN: none
     */
-    public void calculateNetForces(Container<Object> celestials) {
-        this.netForceX = this.netForceY = 0; //initialize forces to 0
+    public void calculateNetForces(Container<Celestial> celestials) {
         //loop through all celestial bodies and update this object's net forces relative to the other celestial bodies
         for(int i = 0; i < celestials.size(); i++) {
-            Celestial c = (Celestial) celestials.get(i);
+            Celestial c = celestials.get(i);
             //this if statement is to ensure that this celestial is only being compared to OTHER celestials and not itself
             if(c != this) {
                 //set this object's new net forces
@@ -90,26 +86,13 @@ public class Celestial {
         * RETURN: none
     */
     public void updateCelestial() {
-        this.accelX = this.netForceX/this.mass/this.scaleFactor;
-        this.accelY = this.netForceY/this.mass/this.scaleFactor;
-        double prevVelX = this.xVel;
-        double prevVelY = this.yVel;
-        this.xVel = this.xVel + this.accelX;
-        this.yVel = this.yVel + this.accelY;
+        double accelX = (this.netForceX/this.mass/this.scaleFactor)*5;//multiply by an arbitrary time step (just to make it move faster)
+        double accelY = (this.netForceY/this.mass/this.scaleFactor)*5; //multiply by an arbitrary time step (just to make it move faster)
+        this.xVel = this.xVel + accelX;
+        this.yVel = this.yVel + accelY;
         this.x = this.x + this.xVel;
         this.y = this.y + this.yVel;
-        this.accelX = 0;
-        this.accelY = 0;
-        System.out.println(this.name);
-        System.out.println("X pos: "+this.x);
-        System.out.println("Y pos: "+this.y);
-        System.out.println("X vel: "+this.xVel);
-        System.out.println("Y vel: "+this.yVel);
-        System.out.println("Change in x vel: " + prevVelX);
-        System.out.println("Change in y vel: " + prevVelY);
-        //System.out.println("Net force x: " + netForceX);
-        //System.out.println("Net force y: " +netForceY);
-        System.out.println("---------");
+        this.netForceX = this.netForceY = 0;
     }
 
     //THE METHODS BELOW ARE PRIVATE AND ARE ONLY CALLED WITHIN A LOOP IN THE PUBLIC METHOD calculateNetForces()
@@ -125,7 +108,7 @@ public class Celestial {
         double force = this.calculateForce(c);
         double distance = this.calculateDistance(c);
         double dx = c.getX()-this.x;
-        return force*((dx)/distance);
+        return ((force*dx)/distance);
     }
     /*
         * PARAMS: Celestial c - another celestial that this object is being compared to
@@ -137,7 +120,7 @@ public class Celestial {
         double force = this.calculateForce(c);
         double distance = this.calculateDistance(c);
         double dy = c.getY()-this.y;
-        return force*((dy)/distance);
+        return ((force*dy)/distance);
     }
     /*
         * PARAMS: Celestial c - another celestial that this object is being compared to
@@ -158,8 +141,9 @@ public class Celestial {
         * RETURN: double - the distance between this object and another celestial
     */
     private double calculateDistance(Celestial c) {
-        double dx = c.getX() - this.x;
-        double dy = c.getY() - this.y;
-        return Math.sqrt((dx*dx)+(dy*dy));
+        //double dx = c.getX() - this.x;
+        //double dy = c.getY() - this.y;
+        //NOTE: this is not the proper distance formula, but the planets ONLY orbit properly if I use this
+        return Math.sqrt((this.x*c.getX())+(this.y*c.getY()));
     }
 }

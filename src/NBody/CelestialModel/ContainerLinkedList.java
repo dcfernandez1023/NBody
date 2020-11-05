@@ -55,7 +55,7 @@ public class ContainerLinkedList<T> implements Container<T> {
             this.tail.next = node; //set current tail's next to the new node
             this.tail = node; //set current tail to the new node
         }
-        size++; //increment size
+        this.size++; //increment size
     }
     /*
         PARAMS:
@@ -88,7 +88,7 @@ public class ContainerLinkedList<T> implements Container<T> {
             newNode.next = currentNode.next; //set the new node's next to the current node's next
             currentNode.next = newNode; //set current node's next to the new node
         }
-        size++; //increment size
+        this.size++; //increment size
     }
     /*
         PARAMS:
@@ -121,7 +121,7 @@ public class ContainerLinkedList<T> implements Container<T> {
         if(this.head == null) {
             throw new Exception("Cannot remove nodes from an empty list");
         }
-        //throw exception is position is invalid
+        //throw exception if position is invalid
         if(position < 0 || position >= this.size) {
             throw new Exception("Position " + position + " out of bounds for size " + this.size);
         }
