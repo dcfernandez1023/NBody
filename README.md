@@ -7,6 +7,9 @@ project is something comparable toa virtual solar system.
 
 STRUCTURE OF THE APPLICATION:
 This project follows a model, view, controller (MVC) architecture.  The way that the model, view, and controller interact is described below:
-  -Controller: gets data from source (CSV file) and populates model objects
-  -Model: provides structure for the application by structuring and accepting data in a way that both the controller and view can understand
-  -View: renders the data from the model 
+
+Controller: gets data from source (CSV file) and populates model objects
+
+Model: provides structure for the application by structuring and accepting data in a way that both the controller and view can understand
+
+View: renders the data from the model 
